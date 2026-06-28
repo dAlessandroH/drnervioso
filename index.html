@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Erick Landeros Monsalvo · Dr. Nervioso</title>
+<meta name="description" content="Médico General y docente en Neuroanatomía, Neurología, Anatomía, Histología, Embriología y Farmacología en la UAA. Canal educativo: Dr. Nervioso.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════════ */
+:root {
+  --bg:      #ffffff;
+  --bg2:     #f4f8fc;
+  --bg3:     #eaf2f8;
+  --glass:   rgba(255,255,255,0.88);
+  --glass2:  rgba(244,248,252,0.95);
+  --b1:      rgba(0,130,190,0.10);
+  --b2:      rgba(0,130,190,0.20);
+  --b3:      rgba(0,130,190,0.38);
+  --cyan:    #0088bb;
+  --cyan2:   #006699;
+  --mint:    #00a870;
+  --gold:    #b87000;
+  --coral:   #cc3055;
+  --purple:  #6633cc;
+  --emerald: #009966;
+  --t1:      #0d1f2d;
+  --t2:      #3a5a78;
+  --t3:      #7a9ab5;
+  --white:   #ffffff;
+  --r:       14px;
+  --r2:      22px;
+  --r3:      32px;
+  font-size: 16px;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'DM Sans',sans-serif; background:#ffffff; color:var(--t1); overflow-x:hidden; line-height:1.6; }
+::selection { background:rgba(0,130,190,0.18); color:var(--t1); }
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:#f0f4f8; }
+::-webkit-scrollbar-thumb { background:var(--cyan); border-radius:4px; }
+
+/* ═══ LOADING SCREEN ═══ */
+#loader {
+  position:fixed; inset:0; z-index:9999;
+  background:#ffffff;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.5rem;
+}
+.loader-logo {
+  width:90px; height:90px; border-radius:50%;
+  border:2px solid var(--b3);
+  box-shadow:0 0 40px rgba(0,207,255,0.3), 0 0 80px rgba(0,207,255,0.1);
+  object-fit:cover;
+  animation:loadPulse 1.2s ease-in-out infinite;
+}
+@keyframes loadPulse { 0%,100%{box-shadow:0 0 40px rgba(0,207,255,0.3);} 50%{box-shadow:0 0 80px rgba(0,207,255,0.6), 0 0 120px rgba(0,207,255,0.2);} }
+.loader-name { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; color:var(--t2); letter-spacing:0.15em; text-transform:uppercase; }
+.loader-bar { width:140px; height:2px; background:var(--b1); border-radius:2px; overflow:hidden; }
+.loader-fill { height:100%; width:0; background:linear-gradient(90deg,var(--cyan),var(--mint)); border-radius:2px; animation:loaderFill 1.6s ease forwards; }
+@keyframes loaderFill { to { width:100%; } }
+
+/* ═══ PROGRESS BAR ═══ */
+#progress {
+  position:fixed; top:0; left:0; height:2px; z-index:9998;
+  background:linear-gradient(90deg,var(--cyan),var(--mint));
+  box-shadow:0 0 10px var(--cyan); transition:width 0.1s;
+}
+
+/* ═══ CANVAS ═══ */
+#nc { position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.4; }
+
+/* ═══ FLOATING SIDEBAR ═══ */
+.float-bar {
+  position:fixed; right:1.5rem; top:50%; transform:translateY(-50%);
+  z-index:90; display:flex; flex-direction:column; align-items:center; gap:0.8rem;
+}
+.float-bar a {
+  width:40px; height:40px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(255,255,255,0.92); border:1px solid rgba(0,0,0,0.1);
+  color:var(--t2); text-decoration:none;
+  transition:all 0.25s; backdrop-filter:blur(16px);
+  box-shadow:0 2px 12px rgba(0,0,0,0.08);
+}
+.float-bar a:hover { border-color:var(--b3); color:var(--cyan); transform:translateX(-3px); box-shadow:0 4px 20px rgba(0,130,190,0.15); }
+.float-bar a svg { width:17px; height:17px; fill:currentColor; }
+.float-line { width:1px; height:50px; background:linear-gradient(to bottom,transparent,var(--t3),transparent); }
+
+/* ═══ MOBILE MENU ═══ */
+#mmenu {
+  position:fixed; inset:0; z-index:200;
+  background:rgba(2,11,20,0.98); backdrop-filter:blur(24px);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2.2rem;
+  opacity:0; visibility:hidden; transition:all 0.35s;
+}
+#mmenu.open { opacity:1; visibility:visible; }
+#mmenu a { font-family:'Syne',sans-serif; font-size:2.2rem; font-weight:700; color:var(--t2); text-decoration:none; letter-spacing:-0.02em; transition:color 0.2s; }
+#mmenu a:hover { color:var(--cyan); }
+.m-close { position:absolute; top:1.5rem; right:1.8rem; font-size:2rem; color:var(--t3); cursor:pointer; transition:color 0.2s; line-height:1; }
+.m-close:hover { color:var(--cyan); }
+
+/* ═══ NAV ═══ */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0.9rem 2.5rem;
+  background:rgba(255,255,255,0.94); backdrop-filter:blur(22px);
+  border-bottom:1px solid rgba(0,0,0,0.06);
+  transition:background 0.3s;
+  box-shadow:0 1px 20px rgba(0,0,0,0.05);
+}
+.nav-brand { display:flex; align-items:center; gap:0.65rem; text-decoration:none; }
+.nav-brand img { width:34px; height:34px; border-radius:50%; border:1.5px solid var(--b2); object-fit:cover; }
+.nav-brand span { font-family:'Syne',sans-serif; font-size:0.95rem; font-weight:700; letter-spacing:0.04em; background:linear-gradient(90deg,var(--cyan),var(--mint)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.nav-links { display:flex; gap:2rem; list-style:none; align-items:center; }
+.nav-links a { color:var(--t2); text-decoration:none; font-size:0.82rem; font-weight:400; letter-spacing:0.05em; transition:color 0.2s; position:relative; padding-bottom:3px; }
+.nav-links a::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:var(--cyan); transform:scaleX(0); transition:transform 0.25s; transform-origin:left; }
+.nav-links a:hover, .nav-links a.active { color:var(--cyan); }
+.nav-links a.active::after, .nav-links a:hover::after { transform:scaleX(1); }
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+.hamburger span { width:22px; height:1.5px; background:var(--t2); border-radius:2px; transition:all 0.3s; display:block; }
+
+/* ═══ BACK TO TOP ═══ */
+#btt {
+  position:fixed; bottom:2rem; left:2rem; z-index:90;
+  width:40px; height:40px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:var(--glass2); border:1px solid var(--b2);
+  color:var(--cyan); cursor:pointer; font-size:1rem;
+  opacity:0; visibility:hidden; transition:all 0.3s;
+  backdrop-filter:blur(16px);
+}
+#btt.show { opacity:1; visibility:visible; }
+#btt:hover { background:rgba(0,207,255,0.15); box-shadow:0 0 20px rgba(0,207,255,0.25); transform:translateY(-2px); }
+
+/* ═══ SHARED SECTION ═══ */
+.sec { position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:7rem 2rem; }
+.sec-label { font-size:0.68rem; font-weight:500; letter-spacing:0.22em; color:var(--cyan); text-transform:uppercase; margin-bottom:0.8rem; display:flex; align-items:center; gap:0.6rem; }
+.sec-label::before { content:''; width:18px; height:1px; background:var(--cyan); flex-shrink:0; }
+.sec-title { font-family:'Syne',sans-serif; font-size:clamp(1.9rem,4vw,3rem); font-weight:700; color:var(--white); margin-bottom:1rem; line-height:1.12; letter-spacing:-0.02em; }
+.sec-desc { color:var(--t2); max-width:520px; font-size:0.92rem; line-height:1.8; font-weight:300; margin-bottom:3rem; }
+
+/* ═══ HERO ═══ */
+header {
+  position:relative; min-height:100vh; z-index:1;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:8rem 2rem 5rem; overflow:hidden;
+}
+.hero-glow { position:absolute; top:40%; left:50%; transform:translate(-50%,-50%); width:600px; height:600px; background:radial-gradient(ellipse,rgba(0,207,255,0.06) 0%,transparent 65%); pointer-events:none; }
+.hero-badge {
+  display:inline-flex; align-items:center; gap:0.5rem;
+  padding:0.4rem 1.2rem; border-radius:50px;
+  border:1px solid var(--b2); background:rgba(0,207,255,0.06);
+  font-size:0.7rem; font-weight:500; letter-spacing:0.14em;
+  color:var(--cyan); text-transform:uppercase; margin-bottom:2rem;
+  backdrop-filter:blur(12px);
+  animation:fadeDown 0.8s ease both;
+}
+.hero-badge-dot { width:6px; height:6px; border-radius:50%; background:var(--cyan); animation:blinkDot 2s infinite; }
+@keyframes blinkDot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes fadeDown { from{opacity:0;transform:translateY(-18px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeUp   { from{opacity:0;transform:translateY(24px)}  to{opacity:1;transform:translateY(0)} }
+
+.hero-img {
+  width:170px; height:170px; border-radius:50%; object-fit:cover;
+  border:2px solid var(--b3);
+  box-shadow:0 0 60px rgba(0,207,255,0.22), 0 0 120px rgba(0,207,255,0.08);
+  margin-bottom:2.2rem;
+  animation:fadeDown 0.9s 0.1s ease both, floatImg 7s 1s ease-in-out infinite;
+}
+@keyframes floatImg { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+header h1 {
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.4rem,5.5vw,4.8rem);
+  font-weight:800; line-height:1.06; letter-spacing:-0.03em;
+  margin-bottom:1rem;
+  background:linear-gradient(135deg,#ffffff 20%,var(--cyan) 60%,var(--mint) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  animation:fadeUp 1s 0.25s ease both;
+}
+.hero-subtitle {
+  font-family:'DM Sans',sans-serif;
+  font-size:1.05rem; color:var(--t2); height:1.6rem;
+  margin-bottom:3rem; font-weight:300;
+  animation:fadeUp 1s 0.4s ease both;
+}
+.hero-subtitle .typed-cursor { color:var(--cyan); animation:blink 1s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.hero-cta { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; animation:fadeUp 1s 0.55s ease both; margin-bottom:2.5rem; }
+
+/* Social pills in hero */
+.hero-socials { display:flex; gap:0.8rem; justify-content:center; align-items:center; animation:fadeUp 1s 0.7s ease both; }
+.hero-social-pill {
+  display:inline-flex; align-items:center; gap:0.4rem;
+  padding:0.35rem 0.9rem; border-radius:50px;
+  border:1px solid var(--b1); background:rgba(0,207,255,0.04);
+  color:var(--t2); text-decoration:none; font-size:0.75rem; font-weight:400;
+  transition:all 0.2s; backdrop-filter:blur(8px);
+}
+.hero-social-pill svg { width:13px; height:13px; fill:currentColor; }
+.hero-social-pill:hover { border-color:var(--b3); color:var(--cyan); }
+
+/* EKG wave */
+.ekg-container { position:absolute; bottom:0; left:0; right:0; height:90px; overflow:hidden; pointer-events:none; }
+.ekg-svg { width:100%; height:100%; }
+.ekg-path { fill:none; stroke:var(--cyan); stroke-width:1.5; opacity:0.35; stroke-dasharray:2000; stroke-dashoffset:2000; animation:ekgDraw 2s 1.8s ease forwards; }
+@keyframes ekgDraw { to { stroke-dashoffset:0; } }
+.ekg-path2 { fill:none; stroke:var(--mint); stroke-width:0.8; opacity:0.18; }
+
+/* Scroll hint */
+.scroll-hint { position:absolute; bottom:3rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:0.5rem; color:var(--t3); font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; animation:fadeUp 1s 1.2s ease both; }
+.scroll-arrow { width:20px; height:20px; border-right:1px solid var(--t3); border-bottom:1px solid var(--t3); transform:rotate(45deg); animation:bounce 2s 2s ease-in-out infinite; }
+@keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(5px)} }
+
+/* ═══ BUTTONS ═══ */
+.btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.78rem 1.9rem; border-radius:50px; font-size:0.86rem; font-weight:500; cursor:pointer; text-decoration:none; transition:all 0.25s; font-family:'DM Sans',sans-serif; letter-spacing:0.03em; border:none; }
+.btn-c { background:linear-gradient(135deg,var(--cyan),var(--cyan2)); color:#010c17; }
+.btn-c:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(0,207,255,0.35); }
+.btn-g { border:1px solid var(--b2); color:var(--cyan); background:rgba(0,207,255,0.05); }
+.btn-g:hover { background:rgba(0,207,255,0.12); transform:translateY(-2px); border-color:var(--b3); }
+.btn-m { background:rgba(77,255,184,0.1); color:var(--mint); border:1px solid rgba(77,255,184,0.25); }
+.btn-m:hover { background:rgba(77,255,184,0.2); transform:translateY(-2px); }
+.btn-sm { padding:0.55rem 1.3rem; font-size:0.8rem; }
+
+/* ═══ ABOUT ═══ */
+.about-bg { background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%); }
+.about-grid { display:grid; grid-template-columns:1fr 1.5fr; gap:5rem; align-items:center; }
+.about-img-wrap { position:relative; }
+.about-img-bg { position:absolute; inset:-20px; border-radius:var(--r3); background:radial-gradient(ellipse at center,rgba(0,207,255,0.07) 0%,transparent 70%); }
+.about-img {
+  width:100%; border-radius:var(--r2); object-fit:cover;
+  border:1px solid var(--b2);
+  box-shadow:0 30px 80px rgba(0,0,0,0.5), 0 0 60px rgba(0,207,255,0.08);
+  position:relative; z-index:1;
+}
+.about-tag { display:inline-flex; align-items:center; gap:0.5rem; padding:0.3rem 0.8rem; border-radius:50px; background:rgba(0,207,255,0.08); border:1px solid var(--b1); font-size:0.72rem; color:var(--cyan); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:1.2rem; }
+.about-bio { font-size:0.96rem; color:var(--t2); line-height:1.85; font-weight:300; margin-bottom:2rem; }
+.about-bio strong { color:var(--t1); font-weight:400; }
+.creds-grid { display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-bottom:2rem; }
+.cred-item { display:flex; align-items:center; gap:0.75rem; padding:0.85rem 1.1rem; background:var(--glass); border:1px solid var(--b1); border-radius:var(--r); backdrop-filter:blur(12px); transition:border-color 0.2s; }
+.cred-item:hover { border-color:var(--b2); }
+.cred-icon { font-size:1.2rem; flex-shrink:0; }
+.cred-text h5 { font-family:'Syne',sans-serif; font-size:0.82rem; font-weight:600; color:var(--t1); }
+.cred-text p { font-size:0.74rem; color:var(--t2); font-weight:300; }
+
+/* ═══ STATS ═══ */
+.stats-outer { position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:0 2rem; }
+.stats-grid { display:grid; grid-template-columns:repeat(4,1fr); background:var(--glass2); border:1px solid var(--b1); border-radius:var(--r2); backdrop-filter:blur(20px); overflow:hidden; }
+.stat-cell { padding:2rem 1.5rem; text-align:center; border-right:1px solid var(--b1); transition:background 0.3s; }
+.stat-cell:last-child { border-right:none; }
+.stat-cell:hover { background:rgba(0,207,255,0.04); }
+.stat-n { font-family:'JetBrains Mono',monospace; font-size:2rem; font-weight:700; background:linear-gradient(135deg,var(--cyan),var(--mint)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; margin-bottom:0.5rem; }
+.stat-l { font-size:0.75rem; color:var(--t3); line-height:1.5; }
+
+/* ═══ MATERIAS ═══ */
+.materias-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+.materia-card {
+  background:var(--glass); border:1px solid var(--b1); border-radius:var(--r2);
+  padding:2rem; position:relative; overflow:hidden;
+  cursor:default; transition:transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  backdrop-filter:blur(14px);
+}
+.materia-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--mc-a,var(--cyan)),var(--mc-b,var(--mint))); }
+.materia-card::after { content:''; position:absolute; bottom:-60px; right:-60px; width:140px; height:140px; border-radius:50%; background:radial-gradient(ellipse,var(--mc-a,rgba(0,207,255,0.08)) 0%,transparent 70%); transition:transform 0.4s; }
+.materia-card:hover { transform:translateY(-5px); border-color:var(--b2); box-shadow:0 20px 50px rgba(0,0,0,0.4); }
+.materia-card:hover::after { transform:scale(1.5); }
+.mat-icon { font-size:2rem; margin-bottom:1rem; display:block; }
+.materia-card h3 { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:700; color:var(--white); margin-bottom:0.5rem; }
+.materia-card p { font-size:0.82rem; color:var(--t2); line-height:1.7; font-weight:300; }
+.mat-tag { display:inline-block; margin-top:1rem; padding:0.22rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:500; background:rgba(255,255,255,0.05); color:var(--mc-a,var(--cyan)); border:1px solid currentColor; opacity:0.8; }
+
+/* ═══ STRUCTURES ═══ */
+.struct-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem; }
+.s-card { background:var(--glass); border:1px solid var(--b1); border-radius:var(--r2); padding:1.8rem; position:relative; overflow:hidden; cursor:pointer; transition:transform 0.3s, box-shadow 0.3s, border-color 0.3s; backdrop-filter:blur(14px); }
+.s-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--sa,var(--cyan)),var(--sb,var(--mint))); }
+.s-card:hover { transform:translateY(-5px); border-color:var(--b2); box-shadow:0 20px 50px rgba(0,0,0,0.4),0 0 30px rgba(0,207,255,0.05); }
+.s-icon { width:46px; height:46px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin-bottom:1.1rem; background:rgba(0,207,255,0.08); border:1px solid var(--b1); }
+.s-card h3 { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:600; color:var(--white); margin-bottom:0.5rem; }
+.s-card p { font-size:0.82rem; color:var(--t2); line-height:1.7; font-weight:300; }
+.s-tag { display:inline-block; margin-top:1rem; padding:0.22rem 0.8rem; border-radius:50px; font-size:0.7rem; font-weight:500; background:rgba(0,207,255,0.08); color:var(--cyan); border:1px solid var(--b1); }
+
+/* ═══ LOBULOS ═══ */
+.lobes-bg { background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%); }
+.lobes-layout { display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:start; }
+.lobes-list { display:flex; flex-direction:column; gap:0.75rem; }
+.lobe-c {
+  padding:1.1rem 1.4rem; border:1px solid transparent;
+  border-radius:var(--r); cursor:pointer; transition:all 0.25s;
+  background:var(--glass); backdrop-filter:blur(12px); position:relative; overflow:hidden;
+}
+.lobe-c::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--lc,var(--cyan)); transform:scaleY(0); transition:transform 0.3s; border-radius:0 2px 2px 0; }
+.lobe-c.active, .lobe-c:hover { border-color:var(--lc,var(--b2)); background:rgba(0,207,255,0.05); }
+.lobe-c.active::before, .lobe-c:hover::before { transform:scaleY(1); }
+.lobe-c h4 { font-family:'Syne',sans-serif; font-size:0.9rem; font-weight:600; color:var(--lc,var(--cyan)); margin-bottom:0.25rem; }
+.lobe-c p { font-size:0.78rem; color:var(--t2); line-height:1.6; font-weight:300; }
+.lobe-right { position:sticky; top:110px; }
+.lobe-img-frame { border:1px solid var(--b1); border-radius:var(--r2); overflow:hidden; background:var(--glass); backdrop-filter:blur(14px); padding:1.5rem; margin-bottom:1rem; }
+.lobe-img-frame img { width:100%; display:block; border-radius:12px; }
+.lobe-detail { padding:1.2rem 1.4rem; border:1px solid var(--b2); border-radius:var(--r); background:rgba(0,207,255,0.05); transition:all 0.3s; }
+.lobe-detail-label { font-size:0.65rem; letter-spacing:0.18em; color:var(--cyan); text-transform:uppercase; margin-bottom:0.5rem; font-weight:500; }
+.lobe-detail p { font-size:0.83rem; color:var(--t1); line-height:1.75; font-weight:300; }
+
+/* ═══ NERVIOS TABLE ═══ */
+.table-wrap { overflow-x:auto; border-radius:var(--r2); border:1px solid var(--b1); }
+table { width:100%; border-collapse:collapse; background:var(--glass2); }
+thead { background:rgba(0,207,255,0.07); }
+th { padding:0.95rem 1.2rem; text-align:left; font-size:0.68rem; font-weight:500; letter-spacing:0.15em; color:var(--cyan); text-transform:uppercase; border-bottom:1px solid var(--b1); }
+td { padding:0.85rem 1.2rem; font-size:0.82rem; color:var(--t2); border-bottom:1px solid rgba(0,207,255,0.05); transition:background 0.2s, color 0.2s; }
+tbody tr:last-child td { border-bottom:none; }
+tbody tr:hover td { background:rgba(0,207,255,0.04); color:var(--t1); }
+td:first-child { font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--white); font-weight:700; }
+.badge { display:inline-block; padding:0.18rem 0.65rem; border-radius:50px; font-size:0.67rem; font-weight:500; letter-spacing:0.04em; }
+.bs { background:rgba(0,207,255,0.1); color:var(--cyan); }
+.bm { background:rgba(255,193,66,0.12); color:var(--gold); }
+.bb { background:rgba(77,255,184,0.1); color:var(--mint); }
+
+/* ═══ QUIZ ═══ */
+.quiz-max { max-width:780px; }
+.q-topbar { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:1.8rem; }
+.q-score-chip { display:flex; align-items:center; gap:0.6rem; padding:0.55rem 1.1rem; border-radius:50px; background:var(--glass2); border:1px solid var(--b1); font-size:0.82rem; color:var(--t2); backdrop-filter:blur(12px); }
+.q-score-chip .sn { font-family:'JetBrains Mono',monospace; font-size:1.05rem; font-weight:700; color:var(--mint); }
+.quiz-box { background:var(--glass); border:1px solid var(--b1); border-radius:var(--r2); padding:2.5rem; backdrop-filter:blur(14px); }
+.q-prog-track { height:2px; background:var(--b1); border-radius:2px; margin-bottom:2rem; overflow:hidden; }
+.q-prog-fill { height:100%; background:linear-gradient(90deg,var(--cyan),var(--mint)); border-radius:2px; transition:width 0.5s ease; }
+.q-lbl { font-size:0.67rem; letter-spacing:0.18em; color:var(--t3); text-transform:uppercase; margin-bottom:0.9rem; font-family:'JetBrains Mono',monospace; }
+.q-question { font-family:'Instrument Serif',serif; font-size:1.45rem; line-height:1.45; color:var(--white); margin-bottom:2rem; }
+.q-opts { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1.5rem; }
+.q-opt { padding:0.9rem 1.1rem; border-radius:12px; border:1px solid var(--b1); background:rgba(5,18,35,0.6); color:var(--t1); font-size:0.84rem; cursor:pointer; transition:all 0.2s; text-align:left; font-family:'DM Sans',sans-serif; line-height:1.4; }
+.q-opt:hover:not(:disabled) { border-color:var(--b3); background:rgba(0,207,255,0.07); }
+.q-opt.correct { border-color:var(--mint); background:rgba(77,255,184,0.1); color:var(--mint); }
+.q-opt.wrong   { border-color:var(--coral); background:rgba(255,77,109,0.1); color:var(--coral); }
+.q-opt:disabled { cursor:not-allowed; }
+.q-feedback { min-height:2.8rem; font-size:0.83rem; color:var(--t2); line-height:1.75; font-weight:300; margin-bottom:1.5rem; padding:0.9rem 1.1rem; border-radius:10px; background:rgba(0,207,255,0.03); border:1px solid transparent; transition:all 0.3s; }
+.q-feedback.show { border-color:var(--b1); }
+.q-hint { font-size:0.7rem; color:var(--t3); font-family:'JetBrains Mono',monospace; }
+.q-footer { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.8rem; }
+
+/* Quiz Results Modal */
+#quizModal { position:fixed; inset:0; z-index:500; background:rgba(2,11,20,0.92); backdrop-filter:blur(20px); display:flex; align-items:center; justify-content:center; padding:2rem; opacity:0; visibility:hidden; transition:all 0.4s; }
+#quizModal.show { opacity:1; visibility:visible; }
+.modal-card { background:var(--bg3); border:1px solid var(--b2); border-radius:var(--r2); padding:3rem 2.5rem; text-align:center; max-width:480px; width:100%; position:relative; }
+.modal-icon { font-size:3.5rem; margin-bottom:1rem; display:block; }
+.modal-title { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:700; color:var(--white); margin-bottom:0.5rem; }
+.modal-sub { font-size:0.9rem; color:var(--t2); font-weight:300; margin-bottom:2rem; }
+.modal-score-ring { width:120px; height:120px; border-radius:50%; border:3px solid var(--b2); display:flex; flex-direction:column; align-items:center; justify-content:center; margin:0 auto 1.5rem; position:relative; }
+.modal-score-ring::before { content:''; position:absolute; inset:3px; border-radius:50%; background:conic-gradient(var(--cyan) 0% var(--pct,0%), var(--b1) var(--pct,0%) 100%); opacity:0.4; }
+.modal-big { font-family:'JetBrains Mono',monospace; font-size:2.2rem; font-weight:700; color:var(--white); position:relative; z-index:1; line-height:1; }
+.modal-of  { font-size:0.75rem; color:var(--t2); position:relative; z-index:1; }
+.modal-rating { font-family:'Instrument Serif',serif; font-size:1.3rem; font-style:italic; margin-bottom:2rem; }
+.modal-actions { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+/* ═══ YOUTUBE SECTION ═══ */
+.yt-bg { background:var(--bg2); }
+.yt-inner { max-width:1100px; margin:0 auto; padding:7rem 2rem; }
+.yt-layout { display:grid; grid-template-columns:1.2fr 1fr; gap:4rem; align-items:center; }
+.yt-card { background:var(--glass2); border:1px solid var(--b1); border-radius:var(--r2); padding:2.5rem; position:relative; overflow:hidden; }
+.yt-card::before { content:''; position:absolute; top:-1px; left:0; right:0; height:2px; background:linear-gradient(90deg,#ff0000,#ff4444,#ff0000); }
+.yt-logo-row { display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; }
+.yt-avatar { width:56px; height:56px; border-radius:50%; object-fit:cover; border:2px solid var(--b2); }
+.yt-channel-name { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:700; color:var(--white); }
+.yt-channel-sub { font-size:0.78rem; color:var(--t2); }
+.yt-topics { display:flex; flex-wrap:wrap; gap:0.5rem; margin:1.5rem 0; }
+.yt-topic { padding:0.25rem 0.75rem; border-radius:50px; font-size:0.72rem; background:rgba(255,0,0,0.08); color:#ff6666; border:1px solid rgba(255,0,0,0.2); }
+.yt-text h3 { font-family:'Syne',sans-serif; font-size:clamp(1.5rem,3vw,2.2rem); font-weight:700; color:var(--white); margin-bottom:1rem; line-height:1.2; }
+.yt-text p { font-size:0.92rem; color:var(--t2); line-height:1.8; font-weight:300; margin-bottom:2rem; }
+.yt-stat { display:flex; gap:2rem; margin-bottom:2rem; }
+.yt-stat-item { text-align:left; }
+.yt-stat-item .yn { font-family:'JetBrains Mono',monospace; font-size:1.3rem; font-weight:700; color:var(--gold); }
+.yt-stat-item .yl { font-size:0.74rem; color:var(--t3); }
+
+/* ═══ CONTACT / REDES ═══ */
+.social-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+.social-card { display:flex; flex-direction:column; align-items:flex-start; gap:1rem; padding:2rem; background:var(--glass); border:1px solid var(--b1); border-radius:var(--r2); text-decoration:none; transition:all 0.3s; backdrop-filter:blur(14px); position:relative; overflow:hidden; }
+.social-card::before { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--sc-a,var(--cyan)),var(--sc-b,var(--mint))); transform:scaleX(0); transition:transform 0.3s; transform-origin:left; }
+.social-card:hover { border-color:var(--b2); transform:translateY(-4px); box-shadow:0 20px 50px rgba(0,0,0,0.4); }
+.social-card:hover::before { transform:scaleX(1); }
+.social-icon { width:52px; height:52px; border-radius:var(--r); display:flex; align-items:center; justify-content:center; font-size:1.5rem; background:rgba(255,255,255,0.04); border:1px solid var(--b1); }
+.social-icon svg { width:24px; height:24px; fill:currentColor; }
+.social-card h3 { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:var(--white); }
+.social-card p { font-size:0.8rem; color:var(--t2); line-height:1.6; font-weight:300; flex:1; }
+.social-handle { font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--sc-a,var(--cyan)); margin-top:0.5rem; }
+.social-arrow { margin-top:auto; font-size:0.8rem; color:var(--t3); transition:color 0.2s; }
+.social-card:hover .social-arrow { color:var(--sc-a,var(--cyan)); }
+
+/* ═══ FOOTER ═══ */
+footer { position:relative; z-index:1; border-top:1px solid var(--b1); background:var(--bg2); padding:3.5rem 2rem 2.5rem; }
+.footer-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:2rem; }
+.footer-brand span { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; background:linear-gradient(90deg,var(--cyan),var(--mint)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:block; margin-bottom:0.3rem; }
+.footer-brand p { font-size:0.78rem; color:var(--t3); }
+.footer-links { display:flex; gap:2rem; }
+.footer-links a { color:var(--t2); text-decoration:none; font-size:0.82rem; transition:color 0.2s; }
+.footer-links a:hover { color:var(--cyan); }
+.footer-copy { width:100%; text-align:center; font-size:0.72rem; color:var(--t3); padding-top:2rem; border-top:1px solid var(--b1); margin-top:0.5rem; }
+
+/* ═══ REVEAL ═══ */
+.reveal { opacity:0; transform:translateY(26px); transition:opacity 0.7s, transform 0.7s; }
+.reveal.visible { opacity:1; transform:none; }
+.reveal-l { opacity:0; transform:translateX(-30px); transition:opacity 0.7s, transform 0.7s; }
+.reveal-l.visible { opacity:1; transform:none; }
+.reveal-r { opacity:0; transform:translateX(30px); transition:opacity 0.7s, transform 0.7s; }
+.reveal-r.visible { opacity:1; transform:none; }
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1020px) {
+  .about-grid { grid-template-columns:1fr; }
+  .about-img { max-width:280px; margin:0 auto; display:block; }
+  .about-img-wrap { text-align:center; }
+  .materias-grid { grid-template-columns:1fr 1fr; }
+  .struct-grid { grid-template-columns:1fr 1fr; }
+  .yt-layout { grid-template-columns:1fr; }
+  .float-bar { display:none; }
+}
+@media(max-width:760px) {
+  .stats-grid { grid-template-columns:1fr 1fr; }
+  .stat-cell { border-right:none; border-bottom:1px solid var(--b1); }
+  .stat-cell:nth-child(odd) { border-right:1px solid var(--b1); }
+  .lobes-layout { grid-template-columns:1fr; }
+  .lobe-right { position:relative; top:auto; }
+  .materias-grid { grid-template-columns:1fr; }
+  .struct-grid { grid-template-columns:1fr; }
+  .social-grid { grid-template-columns:1fr; }
+  .creds-grid { grid-template-columns:1fr; }
+  .yt-stat { gap:1.2rem; }
+  .footer-inner { flex-direction:column; }
+  .footer-links { flex-wrap:wrap; gap:1rem; }
+}
+@media(max-width:640px) {
+  .nav-links { display:none; }
+  .hamburger { display:flex; }
+  header h1 { font-size:2.4rem; }
+  .hero-cta { gap:0.7rem; }
+  .q-opts { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loader">
+  <img src="ERICKLOGO.png" alt="Dr.Nervioso" class="loader-logo">
+  <div class="loader-name">Dr. Nervioso</div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+
+<!-- SCROLL PROGRESS -->
+<div id="progress"></div>
+
+<!-- NEURAL CANVAS -->
+<canvas id="nc"></canvas>
+
+<!-- FLOATING SOCIAL SIDEBAR -->
+<div class="float-bar">
+  <div class="float-line"></div>
+  <a href="https://www.youtube.com/@Dr.ErickLanderosM" target="_blank" title="YouTube Dr.Nervioso">
+    <svg viewBox="0 0 24 24"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.7-.8-2.1-.9C16.2 5 12 5 12 5s-4.2 0-6.9.2c-.4 0-1.3.1-2.1.9C2.4 6.6 2.2 8 2.2 8S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.3.9C6.7 19 12 19 12 19s4.2 0 6.9-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5v-5.5l5.7 2.8-5.7 2.7z"/></svg>
+  </a>
+  <a href="https://www.instagram.com/dr.ericklanderosm/" target="_blank" title="Instagram">
+    <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.3 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4a5.8 5.8 0 1 0 0 11.6A5.8 5.8 0 0 0 12 6.2zm0 9.6a3.8 3.8 0 1 1 0-7.6 3.8 3.8 0 0 1 0 7.6zm6.4-9.8a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+  </a>
+  <div class="float-line"></div>
+</div>
+
+<!-- BACK TO TOP -->
+<div id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<!-- MOBILE MENU -->
+<div id="mmenu">
+  <span class="m-close" id="mclose">✕</span>
+  <a href="#sobre-mi" onclick="closeMM()">Sobre mí</a>
+  <a href="#materias" onclick="closeMM()">Materias</a>
+  <a href="#estructuras" onclick="closeMM()">Anatomía</a>
+  <a href="#lobulos" onclick="closeMM()">Lóbulos</a>
+  <a href="#nervios" onclick="closeMM()">Nervios</a>
+  <a href="#quiz" onclick="closeMM()">Quiz</a>
+  <a href="#contacto" onclick="closeMM()">Contacto</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-brand" href="#">
+    <img src="ERICKLOGO.png" alt="Logo">
+    <span>Dr. Nervioso</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#materias">Materias</a></li>
+    <li><a href="#estructuras">Anatomía</a></li>
+    <li><a href="#lobulos">Lóbulos</a></li>
+    <li><a href="#nervios">Nervios</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ════ HERO ════ -->
+<header id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-badge"><span class="hero-badge-dot"></span>Neuroanatomía Clínica · UAA · México</div>
+  <img src="ERICKLOGO.png" alt="Dr. Erick Landeros Monsalvo" class="hero-img">
+  <h1>Dr. Erick Landeros<br>Monsalvo</h1>
+  <div class="hero-subtitle"><span id="typedText"></span><span class="typed-cursor">|</span></div>
+  <div class="hero-cta">
+    <a href="#sobre-mi" class="btn btn-c">Conocer más</a>
+    <a href="#quiz" class="btn btn-g">🧠 Quiz Clínico</a>
+    <a href="https://www.youtube.com/@Dr.ErickLanderosM" target="_blank" class="btn btn-g">▶ Dr. Nervioso</a>
+  </div>
+  <div class="hero-socials">
+    <a href="https://www.youtube.com/@Dr.ErickLanderosM" target="_blank" class="hero-social-pill">
+      <svg viewBox="0 0 24 24"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.7-.8-2.1-.9C16.2 5 12 5 12 5s-4.2 0-6.9.2c-.4 0-1.3.1-2.1.9C2.4 6.6 2.2 8 2.2 8S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.3.9C6.7 19 12 19 12 19s4.2 0 6.9-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5v-5.5l5.7 2.8-5.7 2.7z"/></svg>
+      @Dr.ErickLanderosM
+    </a>
+    <a href="https://www.instagram.com/dr.ericklanderosm/" target="_blank" class="hero-social-pill">
+      <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.3 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4a5.8 5.8 0 1 0 0 11.6A5.8 5.8 0 0 0 12 6.2zm0 9.6a3.8 3.8 0 1 1 0-7.6 3.8 3.8 0 0 1 0 7.6zm6.4-9.8a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+      @dr.ericklanderosm
+    </a>
+  </div>
+  <!-- EKG wave -->
+  <div class="ekg-container">
+    <svg class="ekg-svg" viewBox="0 0 1440 90" preserveAspectRatio="none">
+      <path class="ekg-path" d="M0,45 L80,45 L90,45 L95,20 L100,70 L110,10 L120,80 L130,45 L140,45 L220,45 L230,45 L235,20 L240,70 L250,10 L260,80 L270,45 L280,45 L360,45 L370,45 L375,20 L380,70 L390,10 L400,80 L410,45 L420,45 L500,45 L510,45 L515,20 L520,70 L530,10 L540,80 L550,45 L560,45 L640,45 L650,45 L655,20 L660,70 L670,10 L680,80 L690,45 L700,45 L780,45 L790,45 L795,20 L800,70 L810,10 L820,80 L830,45 L840,45 L920,45 L930,45 L935,20 L940,70 L950,10 L960,80 L970,45 L980,45 L1060,45 L1070,45 L1075,20 L1080,70 L1090,10 L1100,80 L1110,45 L1120,45 L1200,45 L1210,45 L1215,20 L1220,70 L1230,10 L1240,80 L1250,45 L1260,45 L1340,45 L1350,45 L1355,20 L1360,70 L1370,10 L1380,80 L1390,45 L1440,45"/>
+      <path class="ekg-path2" d="M0,45 L1440,45"/>
+    </svg>
+  </div>
+  <div class="scroll-hint"><div class="scroll-arrow"></div>Scroll</div>
+</header>
+
+<!-- ════ STATS ════ -->
+<div style="position:relative;z-index:1;padding:0 2rem;">
+  <div class="stats-outer">
+    <div class="stats-grid reveal">
+      <div class="stat-cell"><div class="stat-n" data-target="86">0</div><div class="stat-l">×10⁹ neuronas<br>en el SNC</div></div>
+      <div class="stat-cell"><div class="stat-n" data-target="12">0</div><div class="stat-l">pares de nervios<br>craneales</div></div>
+      <div class="stat-cell"><div class="stat-n" data-target="6">0</div><div class="stat-l">materias<br>impartidas</div></div>
+      <div class="stat-cell"><div class="stat-n">1.4 kg</div><div class="stat-l">peso promedio<br>del encéfalo adulto</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ SOBRE MÍ ════ -->
+<div class="about-bg" id="sobre-mi">
+  <div class="sec">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal-l">
+        <div class="about-img-bg"></div>
+        <img src="ERICKLOGO.png" alt="Dr. Erick Landeros Monsalvo" class="about-img">
+      </div>
+      <div class="reveal-r">
+        <div class="about-tag">🎓 UAA · Aguascalientes</div>
+        <div class="sec-label">Sobre mí</div>
+        <h2 class="sec-title">Médico, docente<br>y divulgador</h2>
+        <p class="about-bio">
+          Médico General egresado de la <strong>Universidad Autónoma de Aguascalientes (UAA)</strong>, apasionado por las ciencias básicas de la medicina.
+          <br><br>
+          Como docente universitario, transformo conceptos complejos de neurociencia en experiencias de aprendizaje accesibles e impactantes, tanto en el aula como a través del canal educativo <strong>Dr. Nervioso</strong> en YouTube, llevando la neuroanatomía clínica a estudiantes de medicina en todo el mundo hispanohablante.
+        </p>
+        <div class="creds-grid">
+          <div class="cred-item"><span class="cred-icon">🏥</span><div class="cred-text"><h5>Médico General</h5><p>Universidad Autónoma de Aguascalientes</p></div></div>
+          <div class="cred-item"><span class="cred-icon">📚</span><div class="cred-text"><h5>Docente Universitario</h5><p>Ciencias básicas · UAA</p></div></div>
+          <div class="cred-item"><span class="cred-icon">🧠</span><div class="cred-text"><h5>Neuroanatomía Clínica</h5><p>Área de especialización</p></div></div>
+          <div class="cred-item"><span class="cred-icon">🎥</span><div class="cred-text"><h5>Dr. Nervioso</h5><p>Canal educativo en YouTube</p></div></div>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="#materias" class="btn btn-c btn-sm">Ver materias</a>
+          <a href="https://www.youtube.com/@Dr.ErickLanderosM" target="_blank" class="btn btn-g btn-sm">▶ Canal YouTube</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ MATERIAS ════ -->
+<div class="sec" id="materias">
+  <div class="sec-label">Docencia</div>
+  <h2 class="sec-title">Materias Impartidas</h2>
+  <p class="sec-desc">Áreas de enseñanza en las que me desempeño como docente, integrando siempre anatomía clínica con casos y correlaciones prácticas.</p>
+  <div class="materias-grid">
+    <div class="materia-card reveal" style="--mc-a:#00cfff;--mc-b:#4dffb8;">
+      <span class="mat-icon">🧠</span>
+      <h3>Neuroanatomía</h3>
+      <p>Estudio detallado de la arquitectura del sistema nervioso central y periférico, con énfasis en correlaciones clínicas y síndromes neurológicos.</p>
+      <span class="mat-tag">SNC · SNP</span>
+    </div>
+    <div class="materia-card reveal" style="--mc-a:#4dffb8;--mc-b:#00cfff;">
+      <span class="mat-icon">⚡</span>
+      <h3>Neurología Clínica</h3>
+      <p>Semiología y diagnóstico de enfermedades del sistema nervioso. Desde lesiones de pares craneales hasta síndrome de neurona motora superior e inferior.</p>
+      <span class="mat-tag">Semiología · Diagnóstico</span>
+    </div>
+    <div class="materia-card reveal" style="--mc-a:#ffc142;--mc-b:#ffdd88;">
+      <span class="mat-icon">💀</span>
+      <h3>Anatomía Humana</h3>
+      <p>Morfología macroscópica del cuerpo humano. Regiones topográficas, sistemas y correlaciones con procedimientos médicos y quirúrgicos.</p>
+      <span class="mat-tag">Topográfica · Sistémica</span>
+    </div>
+    <div class="materia-card reveal" style="--mc-a:#b48fff;--mc-b:#8866ff;">
+      <span class="mat-icon">🔬</span>
+      <h3>Histología</h3>
+      <p>Organización microscópica de tejidos y órganos. Bases celulares y moleculares que sustentan la función de cada sistema orgánico.</p>
+      <span class="mat-tag">Tejidos · Órganos</span>
+    </div>
+    <div class="materia-card reveal" style="--mc-a:#ff4d6d;--mc-b:#ff8899;">
+      <span class="mat-icon">🧬</span>
+      <h3>Embriología</h3>
+      <p>Desarrollo prenatal humano: de la fecundación a la organogénesis. Mecanismos de malformaciones congénitas y bases del desarrollo normal.</p>
+      <span class="mat-tag">Desarrollo · Teratología</span>
+    </div>
+    <div class="materia-card reveal" style="--mc-a:#0fe59b;--mc-b:#00cfff;">
+      <span class="mat-icon">💊</span>
+      <h3>Farmacología</h3>
+      <p>Mecanismos de acción, farmacocinética y aplicaciones terapéuticas de los principales grupos farmacológicos en medicina clínica.</p>
+      <span class="mat-tag">Mecanismos · Terapéutica</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════ ESTRUCTURAS ════ -->
+<div style="background:var(--bg2);position:relative;z-index:1;" id="estructuras">
+  <div class="sec">
+    <div class="sec-label">Anatomía General</div>
+    <h2 class="sec-title">Estructuras Principales del SNC</h2>
+    <p class="sec-desc">El sistema nervioso central se organiza en regiones especializadas, cada una con funciones críticas para la homeostasis y el comportamiento.</p>
+    <div class="struct-grid">
+      <div class="s-card reveal" style="--sa:#00cfff;--sb:#4dffb8;"><div class="s-icon">🧠</div><h3>Cerebro</h3><p>Estructura más voluminosa del SNC. Dividido en dos hemisferios conectados por el cuerpo calloso. Responsable de cognición, lenguaje, memoria y movimiento voluntario.</p><span class="s-tag">Telencéfalo</span></div>
+      <div class="s-card reveal" style="--sa:#ffc142;--sb:#00cfff;"><div class="s-icon">⚡</div><h3>Diencéfalo</h3><p>Incluye el tálamo (relevo sensorial) y el hipotálamo (control autonómico y endocrino). Regula el ciclo circadiano, temperatura y homeostasis.</p><span class="s-tag">Tálamo · Hipotálamo</span></div>
+      <div class="s-card reveal" style="--sa:#4dffb8;--sb:#00cfff;"><div class="s-icon">🔵</div><h3>Tronco Encefálico</h3><p>Mesencéfalo, protuberancia y bulbo raquídeo. Controla funciones vitales: respiración, frecuencia cardíaca y nivel de conciencia.</p><span class="s-tag">Mesencéfalo · Puente · Bulbo</span></div>
+      <div class="s-card reveal" style="--sa:#b48fff;--sb:#4dffb8;"><div class="s-icon">🌀</div><h3>Cerebelo</h3><p>Coordinación del movimiento, equilibrio y tono muscular. Recibe aferencias de la médula espinal, tronco encefálico y corteza motora.</p><span class="s-tag">Vermis · Hemisferios</span></div>
+      <div class="s-card reveal" style="--sa:#00cfff;--sb:#b48fff;"><div class="s-icon">💧</div><h3>Sistema Ventricular</h3><p>Red de cavidades que producen y circulan el LCR. Ventrículos laterales, III y IV ventrículo conectados por el acueducto de Silvio.</p><span class="s-tag">LCR · Ventrículos</span></div>
+      <div class="s-card reveal" style="--sa:#ff4d6d;--sb:#ffc142;"><div class="s-icon">❤️</div><h3>Sistema Límbico</h3><p>Circuito emocional y mnemónico: hipocampo (memoria declarativa), amígdala (respuesta emocional), giro cingulado y fórnix.</p><span class="s-tag">Hipocampo · Amígdala</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ LÓBULOS ════ -->
+<div class="lobes-bg" id="lobulos">
+  <div class="sec">
+    <div class="sec-label">Corteza Cerebral</div>
+    <h2 class="sec-title">Lóbulos Cerebrales</h2>
+    <p class="sec-desc">La corteza cerebral se divide topográficamente en cuatro lóbulos principales, cada uno con funciones especializadas y relevancia clínica diferencial.</p>
+    <div class="lobes-layout reveal">
+      <div class="lobes-list" id="lobeList">
+        <div class="lobe-c active" style="--lc:#00cfff;" data-info="Contiene la corteza motora primaria (área 4 de Brodmann) y la corteza somatosensorial (áreas 1,2,3). El área de Broca (áreas 44-45) en hemisferio dominante controla el habla expresiva. Lesiones → hemiparesia contralateral, apraxia, afasia de Broca, alteraciones de personalidad."><h4>Lóbulo Frontal</h4><p>Motor, planificación ejecutiva, lenguaje expresivo (Broca), personalidad y control de impulsos.</p></div>
+        <div class="lobe-c" style="--lc:#4dffb8;" data-info="Integra información somatosensorial y asociativa. El giro angular (área 39) es clave para la lectura y escritura. Lesiones → síndrome de Gerstmann (acalculia, agrafia, agnosia digital), hemineglect en hemisferio no dominante."><h4>Lóbulo Parietal</h4><p>Integración sensorial, procesamiento espacial, cálculo aritmético y conciencia corporal.</p></div>
+        <div class="lobe-c" style="--lc:#ffc142;" data-info="Contiene la corteza auditiva primaria (giros de Heschl, áreas 41-42) y el área de Wernicke (área 22) para la comprensión del lenguaje. Lesiones → afasia receptiva, agnosia auditiva, prosopagnosia en hemisferio no dominante."><h4>Lóbulo Temporal</h4><p>Procesamiento auditivo, comprensión del lenguaje (Wernicke), memoria declarativa y reconocimiento facial.</p></div>
+        <div class="lobe-c" style="--lc:#ff4d6d;" data-info="Contiene V1 (área 17) en los labios del surco calcarino. Lesiones → hemianopsia homónima contralateral con respeto macular. Las áreas V2-V5 procesan color, movimiento y profundidad de forma especializada."><h4>Lóbulo Occipital</h4><p>Procesamiento visual primario y de asociación: forma, color, movimiento y reconocimiento de objetos.</p></div>
+        <div class="lobe-c" style="--lc:#b48fff;" data-info="Localizada en la profundidad de la cisura de Silvio (surco lateral). Involucrada en integración visceral, gustativa y vestibular. Lesiones → anosognosia, alteraciones del gusto, disfunción autonómica y dolor visceral."><h4>Ínsula (5.° Lóbulo)</h4><p>Integración interoceptiva, gusto, función autonómica y procesamiento emocional visceral.</p></div>
+      </div>
+      <div class="lobe-right">
+        <div class="lobe-img-frame"><img src="lobulos.png" alt="Lóbulos cerebrales"></div>
+        <div class="lobe-detail">
+          <div class="lobe-detail-label">Detalle clínico</div>
+          <p id="lobeText">Contiene la corteza motora primaria (área 4) y somatosensorial (áreas 1,2,3). Selecciona un lóbulo para ver su relevancia clínica.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ NERVIOS CRANEALES ════ -->
+<div style="background:var(--bg2);position:relative;z-index:1;" id="nervios">
+  <div class="sec">
+    <div class="sec-label">Neurología Clínica</div>
+    <h2 class="sec-title">Nervios Craneales</h2>
+    <p class="sec-desc">Los 12 pares craneales emergen del encéfalo y regulan funciones sensoriales, motoras y autónomas en cabeza, cuello y vísceras.</p>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>N°</th><th>Nombre</th><th>Tipo</th><th>Función Principal</th><th>Exploración Clínica</th></tr></thead>
+        <tbody>
+          <tr><td>I</td><td>Olfatorio</td><td><span class="badge bs">Sensitivo</span></td><td>Olfacción</td><td>Sustancias odoríferas c/u ojo cerrado</td></tr>
+          <tr><td>II</td><td>Óptico</td><td><span class="badge bs">Sensitivo</span></td><td>Visión</td><td>Agudeza visual, campos, fondo de ojo</td></tr>
+          <tr><td>III</td><td>Oculomotor</td><td><span class="badge bm">Motor</span></td><td>Movimientos oculares, ptosis, miosis</td><td>Seguimiento, reflejo fotomotor, ptosis</td></tr>
+          <tr><td>IV</td><td>Troclear</td><td><span class="badge bm">Motor</span></td><td>Movimiento infero-interno del ojo</td><td>Diplopía oblicua, mirada inferior-medial</td></tr>
+          <tr><td>V</td><td>Trigémino</td><td><span class="badge bb">Mixto</span></td><td>Sensibilidad facial, masticación</td><td>Táctil facial, reflejo corneal, masétero</td></tr>
+          <tr><td>VI</td><td>Abducens</td><td><span class="badge bm">Motor</span></td><td>Abducción ocular (recto lateral)</td><td>Mirada lateral, estrabismo convergente</td></tr>
+          <tr><td>VII</td><td>Facial</td><td><span class="badge bb">Mixto</span></td><td>Mímica facial, gusto 2/3 ant., lagrimeo</td><td>Sonreír, fruncir ceño, soplido</td></tr>
+          <tr><td>VIII</td><td>Vestibulococlear</td><td><span class="badge bs">Sensitivo</span></td><td>Audición y equilibrio</td><td>Weber, Rinne, Romberg, nistagmo</td></tr>
+          <tr><td>IX</td><td>Glosofaríngeo</td><td><span class="badge bb">Mixto</span></td><td>Gusto 1/3 post., deglución, nauseoso</td><td>Reflejo faríngeo, sensibilidad amigdalina</td></tr>
+          <tr><td>X</td><td>Vago</td><td><span class="badge bb">Mixto</span></td><td>Voz, deglución, parasimpático visceral</td><td>Disfonía, desviación úvula</td></tr>
+          <tr><td>XI</td><td>Accesorio espinal</td><td><span class="badge bm">Motor</span></td><td>Esternocleidomastoideo y trapecio</td><td>Fuerza al girar cabeza y elevar hombros</td></tr>
+          <tr><td>XII</td><td>Hipogloso</td><td><span class="badge bm">Motor</span></td><td>Movimientos de la lengua</td><td>Protrusión, lateralización, atrofia lingual</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ════ QUIZ ════ -->
+<div class="sec" id="quiz">
+  <div class="quiz-max">
+    <div class="sec-label">Autoevaluación</div>
+    <h2 class="sec-title">Quiz Clínico</h2>
+    <p class="sec-desc">Pon a prueba tus conocimientos. Puedes usar las teclas 1–4 para responder y Enter para avanzar.</p>
+    <div class="q-topbar">
+      <div class="q-score-chip">Puntaje: <span class="sn" id="sc">0</span> / <span id="tc">0</span>&nbsp;· <span id="pct">—</span></div>
+      <button class="btn btn-g btn-sm" onclick="resetQ()">↺ Reiniciar</button>
+    </div>
+    <div class="quiz-box reveal">
+      <div class="q-prog-track"><div class="q-prog-fill" id="qpf" style="width:0%"></div></div>
+      <div class="q-lbl" id="qlbl">Pregunta 1 de 6</div>
+      <p class="q-question" id="qq">—</p>
+      <div class="q-opts" id="qo"></div>
+      <div class="q-feedback" id="qf"></div>
+      <div class="q-footer">
+        <span class="q-hint">Tecla 1–4 selecciona · Enter avanza</span>
+        <button class="btn btn-c btn-sm" id="qnext" onclick="nextQ()" style="display:none;">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ YOUTUBE ════ -->
+<div class="yt-bg" id="media">
+  <div class="yt-inner">
+    <div class="yt-layout">
+      <div class="reveal-l">
+        <div class="sec-label">Contenido Educativo</div>
+        <h2 class="sec-title">Canal YouTube<br><span style="color:var(--cyan)">Dr. Nervioso</span></h2>
+        <p class="yt-text" style="color:var(--t2);font-size:0.94rem;line-height:1.8;font-weight:300;margin-bottom:1.5rem;">Clases completas de neuroanatomía, casos clínicos comentados, mnemonics y recursos para estudiantes de medicina en español. Contenido diseñado para que la neurociencia no te espante.</p>
+        <div class="yt-stat">
+          <div class="yt-stat-item"><div class="yn">▶</div><div class="yl">Videos de neuroanatomía,<br>neurología y anatomía</div></div>
+          <div class="yt-stat-item"><div class="yn">🆓</div><div class="yl">Contenido 100%<br>gratuito en español</div></div>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="https://www.youtube.com/@Dr.ErickLanderosM" target="_blank" class="btn btn-c">▶ Ir al canal</a>
+          <a href="https://www.youtube.com/@Dr.ErickLanderosM?sub_confirmation=1" target="_blank" class="btn btn-g">🔔 Suscribirse</a>
+        </div>
+      </div>
+      <div class="yt-card reveal-r">
+        <div class="yt-logo-row">
+          <img src="ERICKLOGO.png" alt="Dr.Nervioso" class="yt-avatar">
+          <div><div class="yt-channel-name">Dr. Nervioso</div><div class="yt-channel-sub">youtube.com/@Dr.ErickLanderosM</div></div>
+        </div>
+        <p style="font-size:0.84rem;color:var(--t2);line-height:1.7;font-weight:300;margin-bottom:1.2rem;">Neuroanatomía clínica explicada de forma visual, clara y con aplicación directa a la práctica médica.</p>
+        <div class="yt-topics">
+          <span class="yt-topic">Neuroanatomía</span>
+          <span class="yt-topic">Nervios Craneales</span>
+          <span class="yt-topic">Lóbulos Cerebrales</span>
+          <span class="yt-topic">Casos Clínicos</span>
+          <span class="yt-topic">Síndromes Neurológicos</span>
+          <span class="yt-topic">Anatomía Clínica</span>
+          <span class="yt-topic">Histología</span>
+          <span class="yt-topic">Farmacología</span>
+        </div>
+        <a href="https://www.youtube.com/@Dr.ErickLanderosM" target="_blank" class="btn btn-c" style="width:100%;justify-content:center;margin-top:0.5rem;">Ver todos los videos →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ CONTACTO / REDES ════ -->
+<div class="sec" id="contacto">
+  <div class="sec-label">Redes Sociales</div>
+  <h2 class="sec-title">Encuéntrame en</h2>
+  <p class="sec-desc">Sígueme en mis redes para contenido educativo diario, clases en vivo y recursos para estudiantes de medicina.</p>
+  <div class="social-grid reveal">
+    <a href="https://www.youtube.com/@Dr.ErickLanderosM" target="_blank" class="social-card" style="--sc-a:#ff4444;--sc-b:#ff8888;">
+      <div class="social-icon" style="color:#ff4444;">
+        <svg viewBox="0 0 24 24"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.7-.8-2.1-.9C16.2 5 12 5 12 5s-4.2 0-6.9.2c-.4 0-1.3.1-2.1.9C2.4 6.6 2.2 8 2.2 8S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.3.9C6.7 19 12 19 12 19s4.2 0 6.9-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5v-5.5l5.7 2.8-5.7 2.7z"/></svg>
+      </div>
+      <h3>YouTube</h3>
+      <p>Clases completas de neuroanatomía, neurología y anatomía clínica. Contenido educativo gratuito en español para estudiantes de medicina.</p>
+      <span class="social-handle">@Dr.ErickLanderosM</span>
+      <span class="social-arrow">Ver canal →</span>
+    </a>
+    <a href="https://www.instagram.com/dr.ericklanderosm/" target="_blank" class="social-card" style="--sc-a:#e1306c;--sc-b:#f77737;">
+      <div class="social-icon" style="color:#e1306c;">
+        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.3 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4a5.8 5.8 0 1 0 0 11.6A5.8 5.8 0 0 0 12 6.2zm0 9.6a3.8 3.8 0 1 1 0-7.6 3.8 3.8 0 0 1 0 7.6zm6.4-9.8a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+      </div>
+      <h3>Instagram</h3>
+      <p>Infografías de neuroanatomía, tips de estudio, casos clínicos resumidos y contenido visual para aprender más rápido.</p>
+      <span class="social-handle">@dr.ericklanderosm</span>
+      <span class="social-arrow">Ver perfil →</span>
+    </a>
+    <div class="social-card" style="--sc-a:#00cfff;--sc-b:#4dffb8;cursor:default;">
+      <div class="social-icon" style="color:var(--cyan);">🏛️</div>
+      <h3>UAA</h3>
+      <p>Docente en la Universidad Autónoma de Aguascalientes. Ciencias básicas: Neuroanatomía, Anatomía, Histología, Embriología y Farmacología.</p>
+      <span class="social-handle">Universidad Autónoma de Aguascalientes</span>
+      <span class="social-arrow">Aguascalientes, México</span>
+    </div>
+  </div>
+</div>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span>Dr. Erick Landeros Monsalvo</span>
+      <p>Médico General · Docente · Dr. Nervioso · UAA</p>
+    </div>
+    <div class="footer-links">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#materias">Materias</a>
+      <a href="#estructuras">Anatomía</a>
+      <a href="#quiz">Quiz</a>
+      <a href="https://www.youtube.com/@Dr.ErickLanderosM" target="_blank">YouTube</a>
+      <a href="https://www.instagram.com/dr.ericklanderosm/" target="_blank">Instagram</a>
+    </div>
+    <div class="footer-copy">©2026 · Dr. Erick Landeros Monsalvo · Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<!-- ════ QUIZ RESULTS MODAL ════ -->
+<div id="quizModal">
+  <div class="modal-card">
+    <span class="modal-icon" id="mIcon">🏆</span>
+    <h2 class="modal-title">Quiz completado</h2>
+    <p class="modal-sub" id="mSub">Revisa tu resultado a continuación</p>
+    <div class="modal-score-ring" id="mRing">
+      <div class="modal-big" id="mScore">0/6</div>
+      <div class="modal-of" id="mPct">0%</div>
+    </div>
+    <p class="modal-rating" id="mRating">—</p>
+    <div class="modal-actions">
+      <button class="btn btn-c" onclick="resetQ(); document.getElementById('quizModal').classList.remove('show');">↺ Reintentar</button>
+      <button class="btn btn-g" onclick="document.getElementById('quizModal').classList.remove('show');">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════
+   LOADER
+══════════════════════════════════════════ */
+(function() {
+  function hideLoader() {
+    var l = document.getElementById('loader');
+    if (!l || l._hidden) return;
+    l._hidden = true;
+    l.style.transition = 'opacity 0.6s';
+    l.style.opacity = '0';
+    l.style.pointerEvents = 'none';
+    setTimeout(function() { l.style.display = 'none'; }, 650);
+  }
+  // Fire on load, DOMContentLoaded, or guaranteed fallback
+  if (document.readyState === 'complete') {
+    setTimeout(hideLoader, 800);
+  } else {
+    window.addEventListener('load', function() { setTimeout(hideLoader, 800); });
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(hideLoader, 1500); });
+  }
+  setTimeout(hideLoader, 3000); // Hard fallback — always hides
+})();
+
+/* ══ NEURAL CANVAS ══ */
+(function() {
+  const c = document.getElementById('nc'), ctx = c.getContext('2d');
+  let W, H, nodes = [];
+  const resize = () => {
+    W = c.width = window.innerWidth;
+    H = c.height = window.innerHeight;
+    nodes = [];
+    const n = Math.floor((W * H) / 16000);
+    for (let i = 0; i < n; i++) nodes.push({ x: Math.random()*W, y: Math.random()*H, vx: (Math.random()-.5)*.3, vy: (Math.random()-.5)*.3, r: Math.random()*1.5+.5 });
+  };
+  const draw = () => {
+    ctx.clearRect(0, 0, W, H);
+    nodes.forEach((n, i) => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(0,207,255,0.55)'; ctx.fill();
+      for (let j = i+1; j < nodes.length; j++) {
+        const m = nodes[j], d = Math.hypot(n.x-m.x, n.y-m.y);
+        if (d < 150) { ctx.beginPath(); ctx.moveTo(n.x,n.y); ctx.lineTo(m.x,m.y); ctx.strokeStyle = `rgba(0,207,255,${(1-d/150)*.25})`; ctx.lineWidth = .5; ctx.stroke(); }
+      }
+    });
+    requestAnimationFrame(draw);
+  };
+  window.addEventListener('resize', resize);
+  resize(); draw();
+})();
+
+/* ══ PROGRESS BAR ══ */
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('progress').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  document.getElementById('btt').classList.toggle('show', h.scrollTop > 400);
+});
+
+/* ══ TYPEWRITER ══ */
+const phrases = ['Médico General · UAA', 'Docente Universitario', 'Neuroanatomía Clínica', 'Creador de Contenido Educativo', 'Dr. Nervioso en YouTube'];
+let pi = 0, ci = 0, del = false, tid;
+const te = document.getElementById('typedText');
+function type() {
+  const p = phrases[pi];
+  te.textContent = del ? p.slice(0, ci--) : p.slice(0, ci++);
+  if (!del && ci > p.length) { del = true; tid = setTimeout(type, 1400); return; }
+  if (del && ci < 0) { del = false; pi = (pi+1) % phrases.length; ci = 0; }
+  tid = setTimeout(type, del ? 45 : 70);
+}
+setTimeout(type, 1600);
+
+/* ══ REVEAL ══ */
+const ro = new IntersectionObserver(en => en.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+document.querySelectorAll('.reveal, .reveal-l, .reveal-r').forEach(el => ro.observe(el));
+
+/* ══ COUNTER ══ */
+const co = new IntersectionObserver(en => {
+  en.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('[data-target]').forEach(el => {
+        let v = 0; const t = +el.dataset.target;
+        const iv = setInterval(() => { v = Math.min(v + t/40, t); el.textContent = Math.round(v); if (v >= t) clearInterval(iv); }, 40);
+      });
+      co.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+const sg = document.querySelector('.stats-grid');
+if (sg) co.observe(sg);
+
+/* ══ ACTIVE NAV ══ */
+const sections = document.querySelectorAll('header, [id]');
+const navAs = document.querySelectorAll('.nav-links a');
+const no = new IntersectionObserver(en => {
+  en.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id || 'home';
+      navAs.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + id); });
+    }
+  });
+}, { threshold: 0.35, rootMargin: '-60px 0px -40% 0px' });
+document.querySelectorAll('header, .sec, .about-bg>div, .lobes-bg>div, [id]').forEach(s => { if (s.id || s.tagName === 'HEADER') no.observe(s); });
+
+/* ══ LOBES ══ */
+document.querySelectorAll('.lobe-c').forEach(c => {
+  c.addEventListener('click', () => {
+    document.querySelectorAll('.lobe-c').forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+    document.getElementById('lobeText').textContent = c.dataset.info;
+    document.querySelector('.lobe-detail').style.borderColor = getComputedStyle(c).getPropertyValue('--lc').trim();
+  });
+});
+
+/* ══ MOBILE MENU ══ */
+const mm = document.getElementById('mmenu');
+document.getElementById('ham').addEventListener('click', () => mm.classList.add('open'));
+document.getElementById('mclose').addEventListener('click', () => mm.classList.remove('open'));
+function closeMM() { mm.classList.remove('open'); }
+
+/* ══ QUIZ ══ */
+const Qs = [
+  { q: '¿Qué área cortical se lesiona en la afasia de Broca?', opts: ['Giro frontal inferior izquierdo', 'Giro temporal superior', 'Corteza parietal posterior', 'Área visual primaria (V1)'], ans: 0, exp: 'El área de Broca (áreas 44-45 de Brodmann) en el giro frontal inferior izquierdo es el sustrato del lenguaje expresivo. Su lesión produce habla no fluente con comprensión relativamente conservada.' },
+  { q: "Parálisis del III par: ptosis, midriasis y ojo 'abajo y afuera'. ¿Qué músculo queda íntegro?", opts: ['Recto superior', 'Recto medial', 'Recto lateral (VI par)', 'Elevador del párpado superior'], ans: 2, exp: 'El recto lateral está inervado por el VI par (abducens), independiente del III par. Por eso el ojo se desvia inferolateral: el recto lateral tira hacia afuera y el oblicuo superior hacia adentro-abajo.' },
+  { q: '¿Qué estructura diencefálica regula temperatura corporal y secreción hipofisiaria?', opts: ['Tálamo VPL', 'Hipotálamo', 'Núcleo caudado', 'Putamen'], ans: 1, exp: 'El hipotálamo es el centro de control autonómico, endocrino y termorregulador. Regula la hipófisis mediante hormonas liberadoras e inhibidoras, y controla la temperatura a través de mecanismos de sudoración y vasomotricidad.' },
+  { q: 'Lesión del lóbulo temporal NO dominante. ¿Cuál es la consecuencia más característica?', opts: ['Afasia de Wernicke', 'Prosopagnosia y hemineglect', 'Alexia sin agrafia', 'Apraxia ideomotora'], ans: 1, exp: 'El hemisferio no dominante (generalmente derecho) del lóbulo temporal participa en el reconocimiento facial y la atención espacial. Su lesión puede causar prosopagnosia (incapacidad de reconocer rostros) y hemineglect contralateral.' },
+  { q: '¿Por qué vía asciende la sensibilidad propioceptiva y el tacto fino discriminativo?', opts: ['Tracto espinotalámico lateral', 'Tracto espinotalámico anterior', 'Columnas dorsales / Lemnisco medial', 'Tracto espinocerebeloso posterior'], ans: 2, exp: 'La propiocepción y el tacto discriminativo ascienden ipsilaterales por columnas posteriores (Goll y Burdach) hasta el bulbo, donde decusan como lemnisco medial y proyectan al tálamo VPL y de ahí a la corteza S1.' },
+  { q: '¿Qué núcleo del tronco encefálico contiene los somas parasimpáticos del nervio vago?', opts: ['Núcleo ambiguo', 'Núcleo del tracto solitario', 'Núcleo dorsal motor del vago', 'Área postrema'], ans: 2, exp: 'El núcleo dorsal motor del vago (X par) contiene los somas preganglionares parasimpáticos que inervan corazón, pulmones y vísceras abdominales. El núcleo ambiguo aporta las fibras motoras branquiales del vago.' }
+];
+
+let cur = 0, answered = false, score = 0, total = 0;
+
+function renderQ() {
+  answered = false;
+  const q = Qs[cur];
+  document.getElementById('qq').textContent = q.q;
+  document.getElementById('qlbl').textContent = 'Pregunta ' + (cur + 1) + ' de ' + Qs.length;
+  document.getElementById('qpf').style.width = (cur / Qs.length * 100) + '%';
+  var fb = document.getElementById('qf');
+  fb.textContent = ''; fb.classList.remove('show');
+  document.getElementById('qnext').style.display = 'none';
+  var oc = document.getElementById('qo');
+  oc.innerHTML = '';
+  q.opts.forEach(function(t, i) {
+    var b = document.createElement('button');
+    b.className = 'q-opt'; b.textContent = t;
+    b.addEventListener('click', function() { pickA(i); });
+    oc.appendChild(b);
+  });
+}
+
+function pickA(i) {
+  if (answered) return;
+  answered = true; total++;
+  var q = Qs[cur];
+  var btns = document.querySelectorAll('.q-opt');
+  btns.forEach(function(b) { b.disabled = true; });
+  btns[i].classList.add(i === q.ans ? 'correct' : 'wrong');
+  if (i !== q.ans) btns[q.ans].classList.add('correct');
+  else score++;
+  document.getElementById('sc').textContent = score;
+  document.getElementById('tc').textContent = total;
+  var pct = Math.round(score / total * 100);
+  document.getElementById('pct').textContent = pct + '%';
+  var fb = document.getElementById('qf');
+  fb.textContent = q.exp; fb.classList.add('show');
+  document.getElementById('qnext').style.display = 'inline-flex';
+}
+
+function nextQ() {
+  cur = (cur + 1) % Qs.length;
+  if (total > 0 && total % Qs.length === 0) { showModal(); return; }
+  renderQ();
+}
+
+function showModal() {
+  var pct = Math.round(score / Qs.length * 100);
+  var icons = ['📚','💪','✨','🏆'];
+  var ratings = ['Sigue repasando, puedes más.', 'Buen intento, sigue practicando.', '¡Muy bien! Buen dominio del tema.', '¡Excelente! Dominas la neuroanatomía.'];
+  var colors = ['var(--coral)','var(--gold)','var(--cyan)','var(--mint)'];
+  var idx = score <= 1 ? 0 : score <= 3 ? 1 : score <= 5 ? 2 : 3;
+  document.getElementById('mIcon').textContent = icons[idx];
+  document.getElementById('mScore').textContent = score + '/' + Qs.length;
+  document.getElementById('mPct').textContent = pct + '%';
+  document.getElementById('mRating').textContent = ratings[idx];
+  document.getElementById('mRating').style.color = colors[idx];
+  document.getElementById('quizModal').classList.add('show');
+}
+
+function resetQ() {
+  cur = 0; score = 0; total = 0;
+  document.getElementById('sc').textContent = 0;
+  document.getElementById('tc').textContent = 0;
+  document.getElementById('pct').textContent = '—';
+  document.getElementById('quizModal').classList.remove('show');
+  renderQ();
+}
+
+renderQ();
+
+document.addEventListener('keydown', function(e) {
+  var map = {'1':0,'2':1,'3':2,'4':3};
+  if (map[e.key] !== undefined && !answered) pickA(map[e.key]);
+  if ((e.key === 'Enter' || e.key === 'ArrowRight') && answered) nextQ();
+});
+</script>
+</body>
+</html>
