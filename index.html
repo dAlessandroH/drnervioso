@@ -7,6 +7,7 @@
 <meta name="description" content="Médico General y docente en Neuroanatomía, Neurología, Anatomía, Histología, Embriología y Farmacología en la UAA. Canal educativo: Dr. Nervioso.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://kit.fontawesome.com/7e7a400973.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════
@@ -33,7 +34,7 @@
   --t3:      #7a9ab5;
   --white:   #ffffff;
   --r:       14px;
-  --r2:      22px;
+  --r2:      200px;
   --r3:      32px;
   font-size: 16px;
 }
@@ -214,10 +215,7 @@ header h1 {
 @keyframes ekgDraw { to { stroke-dashoffset:0; } }
 .ekg-path2 { fill:none; stroke:var(--mint); stroke-width:0.8; opacity:0.18; }
 
-/* Scroll hint */
-.scroll-hint { position:absolute; bottom:3rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:0.5rem; color:var(--t2); font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; animation:fadeUp 1s 1.2s ease both; }
-.scroll-arrow { width:20px; height:20px; border-right:1px solid var(--t2); border-bottom:1px solid var(--t2); transform:rotate(45deg); animation:bounce 2s 2s ease-in-out infinite; }
-@keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0)} 50%{transform:rotate(45deg) translateY(5px)} }
+
 
 /* ═══ BUTTONS ═══ */
 .btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.78rem 1.9rem; border-radius:50px; font-size:0.86rem; font-weight:500; cursor:pointer; text-decoration:none; transition:all 0.25s; font-family:'DM Sans',sans-serif; letter-spacing:0.03em; border:none; }
@@ -251,7 +249,7 @@ header h1 {
 .cred-text p { font-size:0.74rem; color:var(--t2); font-weight:300; }
 
 /* ═══ STATS ═══ */
-.stats-outer { position:relative; z-index:1; max-width:1100px; margin:0 auto; padding:0 2rem; }
+.stats-outer { position:relative; z-index:1; max-width:1020px; margin:0 auto; padding:0 2rem; }
 .stats-grid { display:grid; grid-template-columns:repeat(4,1fr); background:#ffffff; border:1px solid rgba(0,0,0,0.07); border-radius:var(--r2); box-shadow:0 4px 30px rgba(0,0,0,0.06); overflow:hidden; }
 .stat-cell { padding:2rem 1.5rem; text-align:center; border-right:1px solid rgba(0,0,0,0.06); transition:background 0.3s; }
 .stat-cell:last-child { border-right:none; }
@@ -382,7 +380,7 @@ footer { position:relative; z-index:1; border-top:1px solid rgba(0,0,0,0.06); ba
   .yt-layout { grid-template-columns:1fr; }
   .float-bar { display:none; }
 }
-@media(max-width:760px) {
+@media(max-width:1020px) {
   .stats-grid { grid-template-columns:1fr 1fr; }
   .stat-cell { border-right:none; border-bottom:1px solid var(--b1); }
   .stat-cell:nth-child(odd) { border-right:1px solid var(--b1); }
@@ -409,7 +407,7 @@ footer { position:relative; z-index:1; border-top:1px solid rgba(0,0,0,0.06); ba
 
 <!-- LOADING SCREEN -->
 <div id="loader">
-  <img src="ERICKLOGO.png" alt="Dr.Nervioso" class="loader-logo">
+  <img src="docperfil.jpg" alt="Dr.Nervioso" class="loader-logo">
   <div class="loader-name">Dr. Nervioso</div>
   <div class="loader-bar"><div class="loader-fill"></div></div>
 </div>
@@ -426,7 +424,7 @@ footer { position:relative; z-index:1; border-top:1px solid rgba(0,0,0,0.06); ba
   <a href="https://www.youtube.com/@Dr.ErickLanderosM" target="_blank" title="YouTube Dr.Nervioso">
     <svg viewBox="0 0 24 24"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.7-.8-2.1-.9C16.2 5 12 5 12 5s-4.2 0-6.9.2c-.4 0-1.3.1-2.1.9C2.4 6.6 2.2 8 2.2 8S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.3.9C6.7 19 12 19 12 19s4.2 0 6.9-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5v-5.5l5.7 2.8-5.7 2.7z"/></svg>
   </a>
-  <a href="https://www.instagram.com/dr.ericklanderosm/" target="_blank" title="Instagram">
+  <a href="https://www.instagram.com/dr.erick_landeros.m/" target="_blank" title="Instagram">
     <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.3 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4a5.8 5.8 0 1 0 0 11.6A5.8 5.8 0 0 0 12 6.2zm0 9.6a3.8 3.8 0 1 1 0-7.6 3.8 3.8 0 0 1 0 7.6zm6.4-9.8a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
   </a>
   <div class="float-line"></div>
@@ -467,7 +465,7 @@ footer { position:relative; z-index:1; border-top:1px solid rgba(0,0,0,0.06); ba
 <header id="home">
   <div class="hero-glow"></div>
   <div class="hero-badge"><span class="hero-badge-dot"></span>Neuroanatomía Clínica · UAA · México</div>
-  <img src="ERICKLOGO.png" alt="Dr. Erick Landeros Monsalvo" class="hero-img">
+  <img src="docperfil.jpg" alt="Dr. Erick Landeros Monsalvo" class="hero-img">
   <h1>Dr. Erick Landeros<br>Monsalvo</h1>
   <div class="hero-subtitle"><span id="typedText"></span><span class="typed-cursor">|</span></div>
   <div class="hero-cta">
@@ -486,12 +484,11 @@ footer { position:relative; z-index:1; border-top:1px solid rgba(0,0,0,0.06); ba
   </div>
   <!-- EKG wave -->
   <div class="ekg-container">
-    <svg class="ekg-svg" viewBox="0 0 1440 90" preserveAspectRatio="none">
+    <svg class="ekg-svg" viewBox="0 0 900 90" preserveAspectRatio="none">
       <path class="ekg-path" d="M0,45 L80,45 L90,45 L95,20 L100,70 L110,10 L120,80 L130,45 L140,45 L220,45 L230,45 L235,20 L240,70 L250,10 L260,80 L270,45 L280,45 L360,45 L370,45 L375,20 L380,70 L390,10 L400,80 L410,45 L420,45 L500,45 L510,45 L515,20 L520,70 L530,10 L540,80 L550,45 L560,45 L640,45 L650,45 L655,20 L660,70 L670,10 L680,80 L690,45 L700,45 L780,45 L790,45 L795,20 L800,70 L810,10 L820,80 L830,45 L840,45 L920,45 L930,45 L935,20 L940,70 L950,10 L960,80 L970,45 L980,45 L1060,45 L1070,45 L1075,20 L1080,70 L1090,10 L1100,80 L1110,45 L1120,45 L1200,45 L1210,45 L1215,20 L1220,70 L1230,10 L1240,80 L1250,45 L1260,45 L1340,45 L1350,45 L1355,20 L1360,70 L1370,10 L1380,80 L1390,45 L1440,45"/>
       <path class="ekg-path2" d="M0,45 L1440,45"/>
     </svg>
   </div>
-  <div class="scroll-hint"><div class="scroll-arrow"></div>Scroll</div>
 </header>
 
 <!-- ════ STATS ════ -->
@@ -512,22 +509,21 @@ footer { position:relative; z-index:1; border-top:1px solid rgba(0,0,0,0.06); ba
     <div class="about-grid">
       <div class="about-img-wrap reveal-l">
         <div class="about-img-bg"></div>
-        <img src="ERICKLOGO.png" alt="Dr. Erick Landeros Monsalvo" class="about-img">
+        <img src="docperfil.jpg" alt="Dr. Erick Landeros Monsalvo" class="about-img">
       </div>
       <div class="reveal-r">
         <div class="about-tag">🎓 UAA · Aguascalientes</div>
         <div class="sec-label">Sobre mí</div>
-        <h2 class="sec-title">Médico, docente<br>y divulgador</h2>
+        <h2 class="sec-title">TITULO DESEADO DOC<br></h2>
         <p class="about-bio">
-          Médico General egresado de la <strong>Universidad Autónoma de Aguascalientes (UAA)</strong>, apasionado por las ciencias básicas de la medicina.
-          <br><br>
-          Como docente universitario, transformo conceptos complejos de neurociencia en experiencias de aprendizaje accesibles e impactantes, tanto en el aula como a través del canal educativo <strong>Dr. Nervioso</strong> en YouTube, llevando la neuroanatomía clínica a estudiantes de medicina en todo el mundo hispanohablante.
+          <strong>Texto deseado doc.</strong>
+          Quis quis quis cupidatat ad eu sint consequat eu qui officia sunt deserunt laborum veniam. Lorem magna dolor incididunt ipsum duis velit et adipisicing pariatur. Voluptate consectetur nisi sint velit ut. In laborum voluptate et anim adipisicing. Fugiat id cupidatat cupidatat non dolore ut sunt magna Lorem officia.
         </p>
         <div class="creds-grid">
-          <div class="cred-item"><span class="cred-icon">🏥</span><div class="cred-text"><h5>Médico General</h5><p>Universidad Autónoma de Aguascalientes</p></div></div>
-          <div class="cred-item"><span class="cred-icon">📚</span><div class="cred-text"><h5>Docente Universitario</h5><p>Ciencias básicas · UAA</p></div></div>
-          <div class="cred-item"><span class="cred-icon">🧠</span><div class="cred-text"><h5>Neuroanatomía Clínica</h5><p>Área de especialización</p></div></div>
-          <div class="cred-item"><span class="cred-icon">🎥</span><div class="cred-text"><h5>Dr. Nervioso</h5><p>Canal educativo en YouTube</p></div></div>
+          <div class="cred-item"><span class="cred-icon"><i class="fa-solid fa-staff-snake"></i></span><div class="cred-text"><h5>Médico General</h5><p>Universidad Autónoma de Aguascalientes</p></div></div>
+          <div class="cred-item"><span class="cred-icon"><i class="fa-solid fa-chalkboard-user"></i></span><div class="cred-text"><h5>Docente Universitario</h5><p>Salud · UAA · USF</p></div></div>
+          <div class="cred-item"><span class="cred-icon"><i class="fa-solid fa-brain"></i></span><div class="cred-text"><h5>Neuroanatomía Clínica</h5><p>Área de especialización</p></div></div>
+          <div class="cred-item"><span class="cred-icon"><i class="fa-solid fa-brain"></i></span><div class="cred-text"><h5>Dr. Nervioso</h5><p>Canal en YouTube</p></div></div>
         </div>
         <div style="display:flex;gap:1rem;flex-wrap:wrap;">
           <a href="#materias" class="btn btn-c btn-sm">Ver materias</a>
@@ -542,40 +538,41 @@ footer { position:relative; z-index:1; border-top:1px solid rgba(0,0,0,0.06); ba
 <div class="sec" id="materias">
   <div class="sec-label">Docencia</div>
   <h2 class="sec-title">Materias Impartidas</h2>
+  <p class="sec-desc">Aqui podemos poner lo que usted desee doc...</p>
   <p class="sec-desc">Áreas de enseñanza en las que me desempeño como docente, integrando siempre anatomía clínica con casos y correlaciones prácticas.</p>
   <div class="materias-grid">
     <div class="materia-card reveal" style="--mc-a:#00cfff;--mc-b:#4dffb8;">
-      <span class="mat-icon">🧠</span>
+      <span class="mat-icon"><i class="fa-solid fa-brain"></i></span>
       <h3>Neuroanatomía</h3>
       <p>Estudio detallado de la arquitectura del sistema nervioso central y periférico, con énfasis en correlaciones clínicas y síndromes neurológicos.</p>
       <span class="mat-tag">SNC · SNP</span>
     </div>
     <div class="materia-card reveal" style="--mc-a:#4dffb8;--mc-b:#00cfff;">
-      <span class="mat-icon">⚡</span>
+      <span class="mat-icon"><i class="fa-solid fa-atom"></i></span>
       <h3>Neurología Clínica</h3>
       <p>Semiología y diagnóstico de enfermedades del sistema nervioso. Desde lesiones de pares craneales hasta síndrome de neurona motora superior e inferior.</p>
       <span class="mat-tag">Semiología · Diagnóstico</span>
     </div>
     <div class="materia-card reveal" style="--mc-a:#ffc142;--mc-b:#ffdd88;">
-      <span class="mat-icon">💀</span>
+      <span class="mat-icon"><i class="fa-solid fa-child"></i></span>
       <h3>Anatomía Humana</h3>
       <p>Morfología macroscópica del cuerpo humano. Regiones topográficas, sistemas y correlaciones con procedimientos médicos y quirúrgicos.</p>
       <span class="mat-tag">Topográfica · Sistémica</span>
     </div>
     <div class="materia-card reveal" style="--mc-a:#b48fff;--mc-b:#8866ff;">
-      <span class="mat-icon">🔬</span>
+      <span class="mat-icon"><i class="fa-solid fa-child"></i></span>
       <h3>Histología</h3>
       <p>Organización microscópica de tejidos y órganos. Bases celulares y moleculares que sustentan la función de cada sistema orgánico.</p>
       <span class="mat-tag">Tejidos · Órganos</span>
     </div>
     <div class="materia-card reveal" style="--mc-a:#ff4d6d;--mc-b:#ff8899;">
-      <span class="mat-icon">🧬</span>
+      <span class="mat-icon"><i class="fa-solid fa-vial"></i></span>
       <h3>Embriología</h3>
       <p>Desarrollo prenatal humano: de la fecundación a la organogénesis. Mecanismos de malformaciones congénitas y bases del desarrollo normal.</p>
       <span class="mat-tag">Desarrollo · Teratología</span>
     </div>
     <div class="materia-card reveal" style="--mc-a:#0fe59b;--mc-b:#00cfff;">
-      <span class="mat-icon">💊</span>
+      <span class="mat-icon"><i class="fa-solid fa-capsules"></i></span>
       <h3>Farmacología</h3>
       <p>Mecanismos de acción, farmacocinética y aplicaciones terapéuticas de los principales grupos farmacológicos en medicina clínica.</p>
       <span class="mat-tag">Mecanismos · Terapéutica</span>
@@ -596,31 +593,6 @@ footer { position:relative; z-index:1; border-top:1px solid rgba(0,0,0,0.06); ba
       <div class="s-card reveal" style="--sa:#b48fff;--sb:#4dffb8;"><div class="s-icon">🌀</div><h3>Cerebelo</h3><p>Coordinación del movimiento, equilibrio y tono muscular. Recibe aferencias de la médula espinal, tronco encefálico y corteza motora.</p><span class="s-tag">Vermis · Hemisferios</span></div>
       <div class="s-card reveal" style="--sa:#00cfff;--sb:#b48fff;"><div class="s-icon">💧</div><h3>Sistema Ventricular</h3><p>Red de cavidades que producen y circulan el LCR. Ventrículos laterales, III y IV ventrículo conectados por el acueducto de Silvio.</p><span class="s-tag">LCR · Ventrículos</span></div>
       <div class="s-card reveal" style="--sa:#ff4d6d;--sb:#ffc142;"><div class="s-icon">❤️</div><h3>Sistema Límbico</h3><p>Circuito emocional y mnemónico: hipocampo (memoria declarativa), amígdala (respuesta emocional), giro cingulado y fórnix.</p><span class="s-tag">Hipocampo · Amígdala</span></div>
-    </div>
-  </div>
-</div>
-
-<!-- ════ LÓBULOS ════ -->
-<div class="lobes-bg" id="lobulos">
-  <div class="sec">
-    <div class="sec-label">Corteza Cerebral</div>
-    <h2 class="sec-title">Lóbulos Cerebrales</h2>
-    <p class="sec-desc">La corteza cerebral se divide topográficamente en cuatro lóbulos principales, cada uno con funciones especializadas y relevancia clínica diferencial.</p>
-    <div class="lobes-layout reveal">
-      <div class="lobes-list" id="lobeList">
-        <div class="lobe-c active" style="--lc:#00cfff;" data-info="Contiene la corteza motora primaria (área 4 de Brodmann) y la corteza somatosensorial (áreas 1,2,3). El área de Broca (áreas 44-45) en hemisferio dominante controla el habla expresiva. Lesiones → hemiparesia contralateral, apraxia, afasia de Broca, alteraciones de personalidad."><h4>Lóbulo Frontal</h4><p>Motor, planificación ejecutiva, lenguaje expresivo (Broca), personalidad y control de impulsos.</p></div>
-        <div class="lobe-c" style="--lc:#4dffb8;" data-info="Integra información somatosensorial y asociativa. El giro angular (área 39) es clave para la lectura y escritura. Lesiones → síndrome de Gerstmann (acalculia, agrafia, agnosia digital), hemineglect en hemisferio no dominante."><h4>Lóbulo Parietal</h4><p>Integración sensorial, procesamiento espacial, cálculo aritmético y conciencia corporal.</p></div>
-        <div class="lobe-c" style="--lc:#ffc142;" data-info="Contiene la corteza auditiva primaria (giros de Heschl, áreas 41-42) y el área de Wernicke (área 22) para la comprensión del lenguaje. Lesiones → afasia receptiva, agnosia auditiva, prosopagnosia en hemisferio no dominante."><h4>Lóbulo Temporal</h4><p>Procesamiento auditivo, comprensión del lenguaje (Wernicke), memoria declarativa y reconocimiento facial.</p></div>
-        <div class="lobe-c" style="--lc:#ff4d6d;" data-info="Contiene V1 (área 17) en los labios del surco calcarino. Lesiones → hemianopsia homónima contralateral con respeto macular. Las áreas V2-V5 procesan color, movimiento y profundidad de forma especializada."><h4>Lóbulo Occipital</h4><p>Procesamiento visual primario y de asociación: forma, color, movimiento y reconocimiento de objetos.</p></div>
-        <div class="lobe-c" style="--lc:#b48fff;" data-info="Localizada en la profundidad de la cisura de Silvio (surco lateral). Involucrada en integración visceral, gustativa y vestibular. Lesiones → anosognosia, alteraciones del gusto, disfunción autonómica y dolor visceral."><h4>Ínsula (5.° Lóbulo)</h4><p>Integración interoceptiva, gusto, función autonómica y procesamiento emocional visceral.</p></div>
-      </div>
-      <div class="lobe-right">
-        <div class="lobe-img-frame"><img src="lobulos.png" alt="Lóbulos cerebrales"></div>
-        <div class="lobe-detail">
-          <div class="lobe-detail-label">Detalle clínico</div>
-          <p id="lobeText">Contiene la corteza motora primaria (área 4) y somatosensorial (áreas 1,2,3). Selecciona un lóbulo para ver su relevancia clínica.</p>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -660,7 +632,7 @@ footer { position:relative; z-index:1; border-top:1px solid rgba(0,0,0,0.06); ba
       <div class="reveal-l">
         <div class="sec-label">Contenido Educativo</div>
         <h2 class="sec-title">Canal YouTube<br><span style="color:var(--cyan)">Dr. Nervioso</span></h2>
-        <p class="yt-text" style="color:var(--t2);font-size:0.94rem;line-height:1.8;font-weight:300;margin-bottom:1.5rem;">Clases completas de neuroanatomía, casos clínicos comentados, mnemonics y recursos para estudiantes de medicina en español. Contenido diseñado para que la neurociencia no te espante.</p>
+        <p class="yt-text" style="color:var(--t2);font-size:0.94rem;line-height:1.8;font-weight:300;margin-bottom:1.5rem;">Aqui podemos agregar un parrafo acerca de su canal de YT</p>
         <div class="yt-stat">
           <div class="yt-stat-item"><div class="yn">▶</div><div class="yl">Videos de neuroanatomía,<br>neurología y anatomía</div></div>
           <div class="yt-stat-item"><div class="yn">🆓</div><div class="yl">Contenido 100%<br>gratuito en español</div></div>
@@ -703,24 +675,26 @@ footer { position:relative; z-index:1; border-top:1px solid rgba(0,0,0,0.06); ba
         <svg viewBox="0 0 24 24"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.7-.8-2.1-.9C16.2 5 12 5 12 5s-4.2 0-6.9.2c-.4 0-1.3.1-2.1.9C2.4 6.6 2.2 8 2.2 8S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.3.9C6.7 19 12 19 12 19s4.2 0 6.9-.2c.4 0 1.3-.1 2.1-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5v-5.5l5.7 2.8-5.7 2.7z"/></svg>
       </div>
       <h3>YouTube</h3>
-      <p>Clases completas de neuroanatomía, neurología y anatomía clínica. Contenido educativo gratuito en español para estudiantes de medicina.</p>
+      <p>Aqui podemos poner una descripcion igual doc.</p>
       <span class="social-handle">@Dr.ErickLanderosM</span>
       <span class="social-arrow">Ver canal →</span>
     </a>
-    <a href="https://www.instagram.com/dr.ericklanderosm/" target="_blank" class="social-card" style="--sc-a:#e1306c;--sc-b:#f77737;">
+    <a href="https://www.instagram.com/dr.erick_landeros.m/" target="_blank" class="social-card" style="--sc-a:#e1306c;--sc-b:#f77737;">
       <div class="social-icon" style="color:#e1306c;">
         <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.9.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.6.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.9.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.9-.9-1.4-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.3 2.2 12s0-3.6.1-4.9c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.9-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 4a5.8 5.8 0 1 0 0 11.6A5.8 5.8 0 0 0 12 6.2zm0 9.6a3.8 3.8 0 1 1 0-7.6 3.8 3.8 0 0 1 0 7.6zm6.4-9.8a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
       </div>
       <h3>Instagram</h3>
-      <p>Infografías de neuroanatomía, tips de estudio, casos clínicos resumidos y contenido visual para aprender más rápido.</p>
+      <p>Aqui ppodemos poner  un texto acerca de su instagram.</p>
       <span class="social-handle">@dr.ericklanderosm</span>
       <span class="social-arrow">Ver perfil →</span>
     </a>
     <div class="social-card" style="--sc-a:#00cfff;--sc-b:#4dffb8;cursor:default;">
       <div class="social-icon" style="color:var(--cyan);">🏛️</div>
-      <h3>UAA</h3>
-      <p>Docente en la Universidad Autónoma de Aguascalientes. Ciencias básicas: Neuroanatomía, Anatomía, Histología, Embriología y Farmacología.</p>
+      <h3>Docencia</h3>
+      <p>Docente en la Universidad Autónoma de Aguascalientes |  Neuroanatomía, Anatomía, Histología, Embriología y Farmacología. Y en la Universidad De Santa Fe |  Neuroanatomía, Anatomía, Histología, Embriología</p>
       <span class="social-handle">Universidad Autónoma de Aguascalientes</span>
+      <span class="social-arrow">Aguascalientes, México</span>
+      <span class="social-handle">Universidad De Santa Fe</span>
       <span class="social-arrow">Aguascalientes, México</span>
     </div>
   </div>
@@ -731,16 +705,16 @@ footer { position:relative; z-index:1; border-top:1px solid rgba(0,0,0,0.06); ba
   <div class="footer-inner">
     <div class="footer-brand">
       <span>Dr. Erick Landeros Monsalvo</span>
-      <p>Médico General · Docente · Dr. Nervioso · UAA</p>
+      <p>Médico General · Docente · Dr. Nervioso · UAA · USF </p>
     </div>
     <div class="footer-links">
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#materias">Materias</a>
       <a href="#estructuras">Anatomía</a>
       <a href="https://www.youtube.com/@Dr.ErickLanderosM" target="_blank">YouTube</a>
-      <a href="https://www.instagram.com/dr.ericklanderosm/" target="_blank">Instagram</a>
+      <a href="https://www.instagram.com/dr.erick_landeros.m/" target="_blank">Instagram</a>
     </div>
-    <div class="footer-copy">©2026 · Dr. Erick Landeros Monsalvo · Todos los derechos reservados.</div>
+    <div class="footer-copy">©2026 · Dr. Erick Landeros Monsalvo · Todos los derechos reservados · DEV: KIRILAMX · alessandrocerv12</div>
   </div>
 </footer>
 
